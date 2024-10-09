@@ -1,30 +1,32 @@
 import tkinter as tk
 import customtkinter as ctk
 from tkinter.colorchooser import askcolor
+from tkinter import messagebox
 import pyperclip
 import sys
 
 
 def main():
-    app = App()
+    app = MainWindow()
     app.bind("<Escape>", sys.exit)
     app.mainloop()
 
 
-class App(ctk.CTk):
+class MainWindow(ctk.CTk):
     def __init__(self):
         super().__init__()
 
         # Main Window Configuration
         self.title("Color Picker")
+        self.resizable(False, False)
 
         # Left Column Frame
-        self.col1 = ctk.CTkFrame(self)
-        self.col1.grid(row=0, column=0, sticky="n", pady=5, padx=5)
+        self.leftFrame = ctk.CTkFrame(self)
+        self.leftFrame.grid(row=0, column=0, sticky="n", pady=5, padx=5)
 
-        ctk.CTkLabel(self.col1, text="Saved Palettes").grid(row=0, pady=5, padx=5)
+        ctk.CTkLabel(self.leftFrame, text="Saved Palettes").grid(row=0, pady=5, padx=5)
 
-        self.presetBox = tk.Listbox(self.col1, bg="#222222")
+        self.presetBox = tk.Listbox(self.leftFrame, bg="#222222")
         self.presetBox.grid(row=1, pady=5, padx=5)
 
         # Middle Column Frame
@@ -104,6 +106,16 @@ class App(ctk.CTk):
         # add color to palette
         self.paletteBox.insert(tk.END, colors[1])
         self.paletteBox.itemconfig(tk.END, {"bg": colors[1]})
+
+
+class LeftFrameColumn(ctk.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+
+
+class RightFrameColumn(ctk.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
 
 
 if __name__ == "__main__":
