@@ -1,8 +1,9 @@
 import tkinter as tk
 import customtkinter as ctk
 from tkinter.colorchooser import askcolor
-from tkinter import messagebox
-import pyperclip
+
+# from tkinter import messagebox, PhotoImage
+# import pyperclip
 import sys
 
 
@@ -19,6 +20,7 @@ class MainWindow(ctk.CTk):
         # Main Window Configuration
         self.title("Color Picker")
         self.resizable(False, False)
+        self.iconbitmap("icon.ico")
 
         # Create frames
         self.leftFrame = LeftFrameColumn(self)
@@ -38,8 +40,12 @@ class MainWindow(ctk.CTk):
         self.midFrame.rgbEntry.insert(0, colors[0])
 
         # add color to palette
-        self.rightFrame.paletteBox.insert(tk.END, colors[1])
+        self.rightFrame.paletteBox.insert(tk.END, str(colors[1]))
         self.rightFrame.paletteBox.itemconfig(tk.END, {"bg": colors[1]})
+
+        # copy to clipboard
+        self.clipboard_append
+        self.clipboard_append(str(colors[1]))
 
 
 class LeftFrameColumn(ctk.CTkFrame):
