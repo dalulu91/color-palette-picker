@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tkinter.colorchooser import askcolor
+import pyperclip
 
 
 def main():
